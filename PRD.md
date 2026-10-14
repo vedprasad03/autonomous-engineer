@@ -727,6 +727,7 @@ agent:
   planner: enabled
   retrieval: hybrid
   memory: task
+  verification: final   # final | iterative (see §8.7); covered by agent_config_hash
   max_iterations: 20
 ```
 

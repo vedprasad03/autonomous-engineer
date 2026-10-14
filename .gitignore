@@ -4,16 +4,19 @@
 *.sqlite3-journal
 *.db
 
-# Per-run event logs, patches and other run artifacts (PRD §18, §19)
+# Per-run event logs, patches and other run artifacts (PRD §18, §19).
+# NOTE: no global *.patch rule — reference-fix patches used to validate
+# benchmark tasks (PRD §13) and stored patches re-verified for the ≥99%
+# target (PRD §24) are tracked inputs. Run output belongs under runs/.
 runs/
-output.patch
-*.patch
 
 # Sandbox build context / per-task repository checkouts (PRD §11)
 sandbox/
 .sandbox/
 
-# Benchmark task data pulled from external sources, e.g. SWE-bench (PRD §13)
+# Benchmark task data pulled from external sources, e.g. SWE-bench (PRD §13).
+# Mini-benchmark task specs are a tracked core asset — they live in
+# benchmarks/tasks/, NOT here.
 benchmarks/data/
 
 # Locally downloaded model weights, if not managed by Ollama/LM Studio (PRD §18)
@@ -56,17 +59,17 @@ __pycache__/
 *$py.class
 *.so
 .Python
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
+/develop-eggs/
+/dist/
+/downloads/
+/eggs/
+/.eggs/
+/lib/
+/lib64/
+/parts/
+/sdist/
+/var/
+/wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -106,11 +109,8 @@ ipython_config.py
 # pyenv
 .python-version
 
-# pipenv
-Pipfile.lock
-
-# poetry
-poetry.lock
+# Lock files are TRACKED on purpose (PRD G4 — reproducible evaluation needs a
+# reconstructable environment). Do not add Pipfile.lock / poetry.lock here.
 
 # pdm
 .pdm.toml
@@ -174,8 +174,10 @@ pids
 *.seed
 *.pid.lock
 
-# Claude Code (local tooling config — not committed to this repo)
-.claude/
+# Claude Code — per-machine config stays local, but .claude/skills/ is
+# versioned with the project (the toolchain is part of the setup).
+.claude/settings.local.json
+.claude/*.local.json
 CLAUDE.local.md
 
 # Temporary folders
